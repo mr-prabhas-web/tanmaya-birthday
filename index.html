@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday — Tanmaya 🎂</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  background:#ffe6f2;
+  overflow-x:hidden;
+}
+
+/* ================= PAGE ================= */
+
+.screen{
+  width:100%;
+  min-height:100vh;
+  min-height:100svh;
+
+  display:none;
+  flex-direction:column;
+  align-items:center;
+
+  text-align:center;
+
+  background:linear-gradient(
+    180deg,
+    #ffe6f2,
+    #ffd4ec
+  );
+
+  position:relative;
+
+  overflow-x:hidden;
+  overflow-y:auto;
+
+  padding:35px 15px 35px;
+}
+
+.active{
+  display:flex;
+}
+
+/* ================= PAGE CONTENT ================= */
+
+.page-content{
+  width:100%;
+  max-width:850px;
+
+  min-height:calc(100vh - 70px);
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  position:relative;
+  z-index:5;
+}
+
+/* ================= PAGE 1 ================= */
+
+#screen-1 h1{
+  color:#53213f;
+  font-size:25px;
+  line-height:1.3;
+  margin-bottom:10px;
+}
+
+#screen-1 p{
+  color:#53213f;
+  font-size:16px;
+  margin-bottom:15px;
+}
+
+/* ================= CUSTOM PICKER ================= */
+
+.picker-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  width:100%;
+}
+
+.picker-button{
+  width:150px;
+  padding:12px 15px;
+
+  border-radius:12px;
+  border:2px solid #ffb6df;
+
+  background:white;
+  color:#53213f;
+
+  font-size:16px;
+  text-align:center;
+
+  box-shadow:
+    0 4px 12px rgba(255,100,180,.20);
+
+  cursor:pointer;
+}
+
+.picker-button:active{
+  transform:scale(.97);
+}
+
+/* ================= PICKER POPUP ================= */
+
+.picker-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.55);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:1000;
+}
+
+.picker-overlay.show{
+  display:flex;
+}
+
+.picker-box{
+  width:100%;
+  max-width:500px;
+
+  max-height:82vh;
+
+  background:#191b29;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.45);
+
+  display:flex;
+  flex-direction:column;
+}
+
+.picker-title{
+  padding:20px;
+
+  color:#9b9baa;
+
+  font-size:23px;
+  text-align:left;
+
+  border-bottom:1px solid #292b3b;
+}
+
+.picker-list{
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.picker-option{
+  width:100%;
+  min-height:75px;
+
+  padding:0 25px;
+
+  border:0;
+  border-bottom:1px solid #292b3b;
+
+  border-radius:0;
+
+  background:#191b29;
+  color:#f5f5f8;
+
+  box-shadow:none;
+
+  margin:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  font-size:20px;
+  font-weight:400;
+
+  text-align:left;
+
+  cursor:pointer;
+}
+
+.picker-option:hover{
+  background:#242638;
+}
+
+.picker-option:active{
+  transform:none;
+}
+
+/* ================= PINK CIRCLES ================= */
+
+.radio-circle{
+  width:27px;
+  height:27px;
+
+  border-radius:50%;
+
+  border:3px solid #ff00e6;
+
+  position:relative;
+
+  flex-shrink:0;
+}
+
+.picker-option.selected .radio-circle::after{
+  content:"";
+
+  position:absolute;
+
+  width:13px;
+  height:13px;
+
+  border-radius:50%;
+
+  background:#ff00e6;
+
+  top:50%;
+  left:50%;
+
+  transform:translate(-50%,-50%);
+
+  box-shadow:
+    0 0 8px #ff00e6;
+}
+
+.picker-option.selected{
+  background:#202235;
+  color:white;
+}
+
+/* ================= ERROR ================= */
+
+#error{
+  min-height:25px;
+  color:#e53935 !important;
+  font-weight:600;
+  margin-top:10px;
+}
+
+/* ================= BUTTONS ================= */
+
+.main-button,
+.next-button,
+.back-button{
+
+  margin-top:25px;
+
+  padding:13px 28px;
+
+  border:none;
+  border-radius:25px;
+
+  background:linear-gradient(
+    90deg,
+    #ffb8e2,
+    #ffd86b
+  );
+
+  color:#53213f;
+
+  font-size:16px;
+  font-weight:700;
+
+  box-shadow:
+    0 5px 15px rgba(255,119,183,.35);
+
+  cursor:pointer;
+
+  transition:transform .2s;
+
+  position:relative;
+  z-index:30;
+}
+
+.main-button:hover,
+.next-button:hover,
+.back-button:hover{
+  transform:scale(1.05);
+}
+
+.main-button:active,
+.next-button:active,
+.back-button:active{
+  transform:scale(.96);
+}
+
+/* ================= PAGE 2 ================= */
+
+.page2-text{
+  color:white;
+
+  font-size:25px;
+  font-weight:700;
+  line-height:2;
+
+  text-shadow:
+    0 0 10px #fff,
+    0 0 25px #ffb6d9;
+
+  position:relative;
+  z-index:5;
+}
+
+/* ================= LONG PAGES ================= */
+
+.message-area{
+  width:100%;
+  max-width:850px;
+
+  position:relative;
+  z-index:5;
+
+  padding:10px 5px 30px;
+}
+
+.message{
+  color:#53213f;
+
+  font-size:18px;
+  line-height:2;
+
+  font-weight:500;
+
+  text-align:center;
+
+  text-shadow:
+    0 0 10px white,
+    0 0 20px #ffb6d9;
+
+  width:100%;
+}
+
+/* ================= BUTTON AREA ================= */
+
+.button-row{
+  width:100%;
+  max-width:850px;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  gap:15px;
+  flex-wrap:wrap;
+
+  position:relative;
+  z-index:30;
+
+  padding:5px 0 15px;
+}
+
+/* ================= FALLING EMOJIS ================= */
+
+/*
+   FIXED = continues during scrolling
+   Z-INDEX 20 = ABOVE TEXT
+*/
+
+.falling-container{
+  position:fixed;
+
+  top:0;
+  left:0;
+
+  width:100vw;
+  height:100vh;
+
+  overflow:hidden;
+
+  pointer-events:none;
+
+  z-index:20;
+}
+
+.falling-emoji{
+  position:absolute;
+
+  top:-60px;
+
+  pointer-events:none;
+  user-select:none;
+
+  opacity:.85;
+
+  animation-name:fallDown;
+  animation-timing-function:linear;
+  animation-fill-mode:forwards;
+}
+
+@keyframes fallDown{
+
+  0%{
+    transform:
+      translateY(-70px)
+      rotate(0deg);
+    opacity:0;
+  }
+
+  8%{
+    opacity:.85;
+  }
+
+  100%{
+    transform:
+      translateY(115vh)
+      rotate(360deg);
+    opacity:.85;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+  .screen{
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  #screen-1 h1{
+    font-size:22px;
+  }
+
+  #screen-1 p{
+    font-size:15px;
+  }
+
+  .picker-row{
+    gap:7px;
+  }
+
+  .picker-button{
+    width:145px;
+    font-size:15px;
+  }
+
+  .page2-text{
+    font-size:23px;
+  }
+
+  .message{
+    font-size:17px;
+    line-height:2;
+  }
+
+  .picker-box{
+    max-height:85vh;
+  }
+
+  .picker-option{
+    min-height:70px;
+    font-size:20px;
+  }
+}
+
+@media(max-width:380px){
+
+  .message{
+    font-size:16px;
+  }
+
+  .page2-text{
+    font-size:21px;
+  }
+
+  .picker-button{
+    width:135px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PAGE 1 — PASSWORD
+===================================================== -->
+
+<section id="screen-1" class="screen active">
+
+  <div class="page-content">
+
+    <h1>
+      When is my(prabhas)<br>
+      birthday ❓ 🧐
+    </h1>
+
+    <p>
+      Enter the correct month and day!
+    </p>
+
+    <div class="picker-row">
+
+      <button
+        class="picker-button"
+        id="monthButton">
+        Month
+      </button>
+
+      <button
+        class="picker-button"
+        id="dayButton">
+        Day
+      </button>
+
+    </div>
+
+    <p id="error"></p>
+
+    <button
+      class="main-button"
+      id="unlock">
+      Unlock 🔓
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     MONTH PICKER
+===================================================== -->
+
+<div
+  id="monthPicker"
+  class="picker-overlay">
+
+  <div class="picker-box">
+
+    <div class="picker-title">
+      Month
+    </div>
+
+    <div
+      id="monthList"
+      class="picker-list">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DAY PICKER
+===================================================== -->
+
+<div
+  id="dayPicker"
+  class="picker-overlay">
+
+  <div class="picker-box">
+
+    <div class="picker-title">
+      Day
+    </div>
+
+    <div
+      id="dayList"
+      class="picker-list">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     PAGE 2
+===================================================== -->
+
+<section id="screen-2" class="screen">
+
+  <div
+    id="falling-2"
+    class="falling-container">
+  </div>
+
+  <div class="page-content">
+
+    <div class="page2-text">
+
+      🎂 Happy Birthday 🎂
+      <br>
+      🤍 Bro 🤍
+      <br>
+      💛 Tanmaya 💛
+
+    </div>
+
+  </div>
+
+  <div class="button-row">
+
+    <button
+      class="next-button"
+      id="toWish">
+      Next → Wish 💌
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 3
+===================================================== -->
+
+<section id="screen-3" class="screen">
+
+  <div
+    id="falling-3"
+    class="falling-container">
+  </div>
+
+  <div class="message-area">
+
+    <div class="message">
+
+Happy 🎉 Birthday 🎂 once 🤗 again 🔥 bro ❤️! I 🎯 hope 🌟 this ✨ year 🎊 will 🌈 bring 🎁 you 😊 a 💖 lot 🌟 of happiness 😄, success 🏆, good 💪 health 🧘, lots 💰 of wealth 💸 and countless ♾️ moments 📸 that 😊 make ❤️ you 😎 smile 😁. I 🙏 hope 🌟 you 💪 achieve 🏆 everything 🌍 you're 🔥 working 💯 for 🎯 and get 🎁 all 💖 the things ✨ you 🤝 deserve 👑. Keep 😊 smiling 😁, keep 🔥 enjoying 🎉 life 🌎. May 🙏 this 🎊 new 🆕 year 🎂 of ❤️ your 👑 life 🌟 be ✨ full 💯 of 🗺️ new 🆕 adventures 🚀, great 🤩 memories 📸 and plenty 💖 of reasons 😊 to 😄 be happy 🥳. Enjoy 🎉 your 👑 day 🌞 to 💯 the fullest 🔥, bro ❤️! 🎂🥳🎊🎁💰🏆❤️‍🔥🫂✨
+
+    </div>
+
+  </div>
+
+  <div class="button-row">
+
+    <button
+      class="back-button"
+      id="backTo2">
+      ← Back
+    </button>
+
+    <button
+      class="next-button"
+      id="toThanks">
+      Next → Thank You 💖
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PAGE 4
+===================================================== -->
+
+<section id="screen-4" class="screen">
+
+  <div
+    id="falling-4"
+    class="falling-container">
+  </div>
+
+  <div class="message-area">
+
+    <div class="message">
+
+❤️ Thank 💕 you 💖 bro 💗 for 💝 being 💞 such 💓 a 💘 great 🤍 friend 💜 and 💙 for 💚 all 💛 the 🧡 memories 🤎 we've 🖤 made 🩶 together 🤍. ❤️‍🔥 Whatever 💕 happens 💗, I 💖 hope 💝 our 💞 friendship 💓 stays 💘 the 🤍 same 💜. 💙 And 💚 one 💛 thing 🧡 I 🤎 wanted 🖤 to 🩶 ask 🤍, can ❤️‍🔥 we 💕 talk 💖 at 💗 least 💝 one 💞 minute 💓 every 💘 day 🤍? 💜 I'm 💙 not 💚 forcing 💛 you 🧡, nor 🤎 requesting 🖤, if 🩶 you 🤍 can't ❤️‍🔥, it's 💕 completely 💖 okay 💗. 💝 Thank 💞 you 💓 for 💘 being 🤍 my 💜 best 💙 friend 💚, maybe 💛 more 🧡 than 🤎 that... 🖤 a 🩶 brother 🤍. ❤️ Happy 💕 Birthday 💖 once 💗 again 💝! 🎂🥳 Stay 💞 happy 💓. Stay 💘 crazy 🤍. Stay 💜 the 💙 real 💚 you 💛. ❤️‍🔥🫂💖
+
+    </div>
+
+  </div>
+
+  <div class="button-row">
+
+    <button
+      class="back-button"
+      id="backTo3">
+      ← Back
+    </button>
+
+    <button
+      class="next-button"
+      id="exitSite">
+      Exit 🚪
+    </button>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   MONTHS & DAYS
+===================================================== */
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
+const days = [];
+
+for(let i=1;i<=31;i++){
+  days.push(String(i));
+}
+
+
+/* =====================================================
+   SELECTED VALUES
+===================================================== */
+
+let selectedMonth = "";
+let selectedDay = "";
+
+
+/* =====================================================
+   PICKER ELEMENTS
+===================================================== */
+
+const monthButton =
+  document.getElementById("monthButton");
+
+const dayButton =
+  document.getElementById("dayButton");
+
+const monthPicker =
+  document.getElementById("monthPicker");
+
+const dayPicker =
+  document.getElementById("dayPicker");
+
+const monthList =
+  document.getElementById("monthList");
+
+const dayList =
+  document.getElementById("dayList");
+
+
+/* =====================================================
+   MONTH OPTIONS
+===================================================== */
+
+months.forEach(month => {
+
+  const option =
+    document.createElement("button");
+
+  option.className =
+    "picker-option";
+
+  option.innerHTML = `
+    <span>${month}</span>
+    <span class="radio-circle"></span>
+  `;
+
+  option.onclick = () => {
+
+    selectedMonth = month;
+
+    monthButton.textContent =
+      month;
+
+    document
+      .querySelectorAll(
+        "#monthList .picker-option"
+      )
+      .forEach(item => {
+        item.classList.remove("selected");
+      });
+
+    option.classList.add("selected");
+
+    setTimeout(() => {
+      monthPicker.classList.remove("show");
+    },120);
+  };
+
+  monthList.appendChild(option);
+});
+
+
+/* =====================================================
+   DAY OPTIONS
+===================================================== */
+
+days.forEach(day => {
+
+  const option =
+    document.createElement("button");
+
+  option.className =
+    "picker-option";
+
+  option.innerHTML = `
+    <span>${day}</span>
+    <span class="radio-circle"></span>
+  `;
+
+  option.onclick = () => {
+
+    selectedDay = day;
+
+    dayButton.textContent =
+      day;
+
+    document
+      .querySelectorAll(
+        "#dayList .picker-option"
+      )
+      .forEach(item => {
+        item.classList.remove("selected");
+      });
+
+    option.classList.add("selected");
+
+    setTimeout(() => {
+      dayPicker.classList.remove("show");
+    },120);
+  };
+
+  dayList.appendChild(option);
+});
+
+
+/* =====================================================
+   OPEN PICKERS
+===================================================== */
+
+monthButton.onclick = () => {
+  monthPicker.classList.add("show");
+};
+
+dayButton.onclick = () => {
+  dayPicker.classList.add("show");
+};
+
+
+/* =====================================================
+   CLOSE BY TAPPING OUTSIDE
+===================================================== */
+
+monthPicker.onclick = event => {
+
+  if(event.target === monthPicker){
+    monthPicker.classList.remove("show");
+  }
+
+};
+
+dayPicker.onclick = event => {
+
+  if(event.target === dayPicker){
+    dayPicker.classList.remove("show");
+  }
+
+};
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+const screens =
+  [...document.querySelectorAll(".screen")];
+
+
+/* =====================================================
+   UNLOCK
+===================================================== */
+
+document
+.getElementById("unlock")
+.onclick = () => {
+
+  const error =
+    document.getElementById("error");
+
+  if(
+    selectedMonth === "August" &&
+    selectedDay === "10"
+  ){
+
+    screens[0]
+      .classList
+      .remove("active");
+
+    screens[1]
+      .classList
+      .add("active");
+
+    screens[1].scrollTop = 0;
+
+    error.textContent = "";
+
+    startEmojiFall(
+      "falling-2",
+      [
+        "🎂",
+        "🤍",
+        "🎉",
+        "🎊",
+        "🏵️",
+        "🍫",
+        "🍰",
+        "🥳"
+      ],
+      250,
+      2.5,
+      4.5
+    );
+
+  }else{
+
+    error.textContent =
+      "Oops! Wrong date 😅 Try again!";
+
+  }
+
+};
+
+
+/* =====================================================
+   PAGE 2 → PAGE 3
+===================================================== */
+
+document
+.getElementById("toWish")
+.onclick = () => {
+
+  screens[1]
+    .classList
+    .remove("active");
+
+  screens[2]
+    .classList
+    .add("active");
+
+  screens[2].scrollTop = 0;
+
+  startEmojiFall(
+    "falling-3",
+    [
+      "🥳",
+      "🥰",
+      "🎊",
+      "🎉",
+      "🔥",
+      "🫄🏻",
+      "🫄🏻",
+      "🍫",
+      "🍰",
+      "🎂"
+    ],
+    300,
+    5,
+    7
+  );
+
+};
+
+
+/* =====================================================
+   PAGE 3 → PAGE 4
+===================================================== */
+
+document
+.getElementById("toThanks")
+.onclick = () => {
+
+  screens[2]
+    .classList
+    .remove("active");
+
+  screens[3]
+    .classList
+    .add("active");
+
+  screens[3].scrollTop = 0;
+
+  startEmojiFall(
+    "falling-4",
+    [
+      "🤍",
+      "🩷",
+      "💜",
+      "💛",
+      "🌸",
+      "💮",
+      "🌼",
+      "🏵️",
+      "🍃",
+      "🫄🏻",
+      "🫄🏻"
+    ],
+    320,
+    5.5,
+    7.5
+  );
+
+};
+
+
+/* =====================================================
+   BACK BUTTONS
+===================================================== */
+
+document
+.getElementById("backTo2")
+.onclick = () => {
+
+  screens[2]
+    .classList
+    .remove("active");
+
+  screens[1]
+    .classList
+    .add("active");
+
+  screens[1].scrollTop = 0;
+
+};
+
+
+document
+.getElementById("backTo3")
+.onclick = () => {
+
+  screens[3]
+    .classList
+    .remove("active");
+
+  screens[2]
+    .classList
+    .add("active");
+
+  screens[2].scrollTop = 0;
+
+};
+
+
+/* =====================================================
+   EXIT
+===================================================== */
+
+document
+.getElementById("exitSite")
+.onclick = () => {
+  location.reload();
+};
+
+
+/* =====================================================
+   FALLING EMOJI ENGINE
+===================================================== */
+
+function startEmojiFall(
+  containerId,
+  emojis,
+  interval,
+  minDuration,
+  maxDuration
+){
+
+  const container =
+    document.getElementById(containerId);
+
+  /* Don't start the same page twice */
+
+  if(container.dataset.started === "true"){
+    return;
+  }
+
+  container.dataset.started = "true";
+
+  setInterval(() => {
+
+    const emoji =
+      document.createElement("div");
+
+    emoji.textContent =
+      emojis[
+        Math.floor(
+          Math.random() * emojis.length
+        )
+      ];
+
+    emoji.className =
+      "falling-emoji";
+
+    emoji.style.left =
+      Math.random() * 96 + "%";
+
+    emoji.style.fontSize =
+      (18 + Math.random() * 16) + "px";
+
+    const duration =
+      minDuration +
+      Math.random() *
+      (maxDuration - minDuration);
+
+    emoji.style.animationDuration =
+      duration + "s";
+
+    emoji.style.transform =
+      `rotate(${Math.random()*360}deg)`;
+
+    container.appendChild(emoji);
+
+    setTimeout(() => {
+      emoji.remove();
+    },(duration + 1) * 1000);
+
+  },interval);
+}
+
+</script>
+
+</body>
+</html>
